@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 const App = () => {
-
   const [idInstance, setIdInstance] = useState("");
   const [apiTokenInstance, setApiTokenInstance] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -53,7 +52,6 @@ const App = () => {
     }
   };
 
-
   const receiveMessages = async () => {
     try {
       const response = await axios.get(
@@ -96,7 +94,6 @@ const App = () => {
     }
   };
 
-
   useEffect(() => {
     if (isLoggedIn) {
       const interval = setInterval(() => {
@@ -105,7 +102,6 @@ const App = () => {
       return () => clearInterval(interval);
     }
   }, [isLoggedIn]);
-
 
   const handleLogin = () => {
     if (!idInstance || !apiTokenInstance) {
