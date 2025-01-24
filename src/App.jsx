@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 const App = () => {
-  // Состояния для хранения данных и сообщений
+
   const [idInstance, setIdInstance] = useState("");
   const [apiTokenInstance, setApiTokenInstance] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -10,10 +10,10 @@ const App = () => {
   const [chatMessages, setChatMessages] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  // Состояния для отображения ошибок
+
   const [error, setError] = useState(null);
 
-  // Функция для отправки сообщения
+
   const sendMessage = async () => {
     if (!message || !phoneNumber) {
       setError("Введите сообщение и номер телефона");
@@ -37,12 +37,12 @@ const App = () => {
       );
 
       if (response.data.idMessage) {
-        // Добавляем новое сообщение в чат
+     
         setChatMessages((prevMessages) => [
           ...prevMessages,
           { sender: "You", text: message },
         ]);
-        setMessage(""); // Очищаем поле ввода
+        setMessage(""); 
       } else {
         setError("Ошибка при отправке сообщения");
         console.log(error);
@@ -53,7 +53,7 @@ const App = () => {
     }
   };
 
-  // Функция для получения сообщений
+
   const receiveMessages = async () => {
     try {
       const response = await axios.get(
@@ -73,7 +73,7 @@ const App = () => {
           response.data.body.messageData.textMessageData.textMessage;
 
         setChatMessages((prevMessages) => {
-          // Проверка, чтобы не добавлять одно и то же сообщение несколько раз
+       
           const isMessageExists = prevMessages.some(
             (msg) => msg.sender === sender && msg.text === message
           );
@@ -96,17 +96,17 @@ const App = () => {
     }
   };
 
-  // Хук для автоматической проверки новых сообщений
+
   useEffect(() => {
     if (isLoggedIn) {
       const interval = setInterval(() => {
         receiveMessages();
-      }, 10000); // Получать сообщения каждые 3 секунды
+      }, 10000); 
       return () => clearInterval(interval);
     }
   }, [isLoggedIn]);
 
-  // Функция для входа
+
   const handleLogin = () => {
     if (!idInstance || !apiTokenInstance) {
       setError("Введите учетные данные");
