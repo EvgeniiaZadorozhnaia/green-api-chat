@@ -6,6 +6,8 @@
   border-radius: 5px;
   max-width: 70%;
   box-shadow: 1px 1px 8px black;
+  display: flex;
+  gap: 10px;
 }
 
 .send_message {
@@ -16,4 +18,10 @@
 .receive_message {
   background-color: white;
   align-self: flex-start;
+}
+
+.time {
+  font-size: 14px;
+  align-self: flex-end;
+  color: #888;
 }

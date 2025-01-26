@@ -3,6 +3,7 @@
   height: 100vh;
   width: 100%;
   font-family: var(--font-style);
+  font-size: var(--small-font-size);
 }
 
 .left_panel {
@@ -37,12 +38,18 @@
   background-color: #ededed;
   width: 75%;
   text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.avatar {
+  height: 50px;
 }
 
 .chat_history {
   display: flex;
   flex-direction: column;
-  padding: 20px;
   overflow-y: auto;
   margin-bottom: 60px;
   width: 100%;
@@ -50,18 +57,32 @@
 }
 
 .message_form {
-  position: fixed;
-  bottom: 2%;
   display: flex;
-  gap: 10px;
-  align-items: center;
-  width: 73%;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+textarea {
+  width: 100%;
+  font-family: var(--font-style);
+  padding: 20px;
+  border: none;
+  resize: none;
+  overflow-y: auto;
+  font-size: var(--small-font-size);
+}
+
+textarea:focus {
+  outline: none;
 }
 
 .send_button {
   border: none;
   background: none;
   cursor: pointer;
+  position: absolute;
+  padding-right: 10px;
 }
 
 .send_icon {
