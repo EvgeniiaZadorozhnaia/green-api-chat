@@ -1,12 +1,14 @@
-import { useState } from "react";
 import Input from "../../components/Input/Input";
 import Button from "../../components/Button/Button";
 import styles from "./Home.module.css";
 import { useNavigate } from "react-router-dom";
 
-export default function Home() {
-  const [idInstance, setIdInstance] = useState("");
-  const [apiTokenInstance, setApiTokenInstance] = useState("");
+export default function Home({
+  idInstance,
+  setIdInstance,
+  apiTokenInstance,
+  setApiTokenInstance,
+}) {
   const navigate = useNavigate();
 
   const handleLogin = (e) => {

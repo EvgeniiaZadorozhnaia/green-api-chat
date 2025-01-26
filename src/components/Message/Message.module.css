@@ -1,0 +1,19 @@
+.send_message,
+.receive_message {
+  position: relative;
+  margin: 5px;
+  padding: 10px;
+  border-radius: 5px;
+  max-width: 70%;
+  box-shadow: 1px 1px 8px black;
+}
+
+.send_message {
+  background-color: var(--light-green);
+  align-self: flex-end;
+}
+
+.receive_message {
+  background-color: white;
+  align-self: flex-start;
+}

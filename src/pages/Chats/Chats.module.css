@@ -1,0 +1,69 @@
+.chat_page {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+  font-family: var(--font-style);
+}
+
+.left_panel {
+  background-color: #ededed;
+  position: fixed;
+  width: 25%;
+  top: 0;
+  left: 0;
+  height: 100%;
+  border-right: 1px solid #ccc;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.right_panel {
+  position: fixed;
+  width: 75%;
+  top: 0;
+  right: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  justify-content: flex-end;
+}
+
+.contact_name {
+  position: fixed;
+  top: 0;
+  left: 25%;
+  padding: 10px 20px;
+  background-color: #ededed;
+  width: 75%;
+  text-align: left;
+}
+
+.chat_history {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  overflow-y: auto;
+  margin-bottom: 60px;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.message_form {
+  position: fixed;
+  bottom: 2%;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  width: 73%;
+}
+
+.send_button {
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.send_icon {
+  height: 48px;
+}

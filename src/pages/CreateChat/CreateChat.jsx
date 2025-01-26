@@ -1,11 +1,9 @@
-import { useState } from "react";
 import styles from "./CreateChat.module.css";
 import Input from "../../components/Input/Input";
 import Button from "../../components/Button/Button";
 import { useNavigate } from "react-router-dom";
 
-export default function CreateChat() {
-  const [phoneNumber, setPhoneNumber] = useState("");
+export default function CreateChat({ phoneNumber, setPhoneNumber }) {
   const navigate = useNavigate();
 
   const handleChat = () => {
@@ -15,8 +13,10 @@ export default function CreateChat() {
   return (
     <>
       <div className={styles.createChat_page}>
+        <h1 className={styles.header}>Введите номер телефона получателя</h1>
         <Input
-          placeholder="Введите номер телефона"
+          className
+          placeholder="89523205466"
           value={phoneNumber}
           onChange={(e) => setPhoneNumber(e.target.value)}
           title="Формат номера телефона: 89523205466"

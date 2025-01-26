@@ -9,7 +9,7 @@
 .header {
   font-size: var(--header-font-size);
   color: var(--green);
-  margin-bottom: 25px;
+  margin-bottom: 15px;
 }
 
 .login_form {

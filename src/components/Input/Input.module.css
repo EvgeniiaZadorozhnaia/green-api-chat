@@ -4,11 +4,10 @@
   border: none;
   font-family: var(--font-style);
   font-size: var(--regular-font-size);
-  box-shadow: 2px 2px 4px var(--green);
+  box-shadow: 2px 2px 4px black;
   width: 100%;
 }
 
 input:focus {
   outline: none;
-  border: 2px solid green;
 }
