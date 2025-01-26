@@ -78,7 +78,6 @@ export default function Chats({ phoneNumber, idInstance, apiTokenInstance }) {
       }
 
       const receiptId = data.receiptId;
-
       if (receiptId) {
         await axios.delete(
           `https://7103.api.greenapi.com/waInstance${idInstance}/deleteNotification/${apiTokenInstance}/${receiptId}`
