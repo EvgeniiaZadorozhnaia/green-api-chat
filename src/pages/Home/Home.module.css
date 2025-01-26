@@ -1,0 +1,36 @@
+.home_page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  font-family: var(--font-style);
+}
+
+.header {
+  font-size: var(--header-font-size);
+  color: var(--green);
+  margin-bottom: 25px;
+}
+
+.login_form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  width: 100%;
+}
+
+.footer {
+  font-size: var(--small-font-size);
+}
+
+.link {
+  display: block;
+  text-decoration: underline;
+  color: var(--green);
+}
+
+.link:hover {
+  cursor: pointer;
+  font-weight: 700;
+}

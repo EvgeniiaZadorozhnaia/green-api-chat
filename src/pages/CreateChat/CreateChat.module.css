@@ -1,0 +1,7 @@
+.createChat_page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    font-family: var(--font-style);
+}

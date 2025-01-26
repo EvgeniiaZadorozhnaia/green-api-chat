@@ -1,15 +1,33 @@
+:root {
+  /* fonts */
+  --font-style: "PT Sans Narrow", serif;
+  --header-font-size: 36px;
+  --regular-font-size: 30px;
+  --medium-font-size: 24px;
+  --small-font-size: 18px;
+
+  /* colors */
+  --background: #d8d4d4;
+  --light-green: #a0eeae;
+  --green: #008000;
+}
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
   text-align: center;
 }
 
-body {
+* {
+  box-sizing: border-box;
   margin: 0;
+  padding: 0;
+}
+
+body {
   display: flex;
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  background-color: var(--background);
 }
-
