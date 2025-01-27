@@ -41,6 +41,7 @@ function App() {
           path="/chats"
           element={
             <Chats
+              setPhoneNumber={setPhoneNumber}
               phoneNumber={phoneNumber}
               idInstance={idInstance}
               apiTokenInstance={apiTokenInstance}

@@ -1,21 +1,26 @@
 :root {
   /* fonts */
   --font-style: "PT Sans Narrow", serif;
-  --header-font-size: 36px;
-  --regular-font-size: 24px;
+  --header-font-size: 32px;
   --small-font-size: 18px;
 
   /* colors */
+
   --background: #d8d4d4;
+  --second-back: #ebf1db;
   --light-green: #a0eeae;
   --medium-green: #83d364;
   --green: #008000;
+  --black: #111;
+  --white: #ffffff;
+  --gray: #888;
 }
 
 #root {
-  max-width: 1280px;
   margin: 0 auto;
   text-align: center;
+  width: 100%;
+  max-width: 1280px;
 }
 
 * {
@@ -28,6 +33,7 @@ body {
   display: flex;
   place-items: center;
   min-width: 320px;
+  
   min-height: 100vh;
   background-color: var(--background);
 }

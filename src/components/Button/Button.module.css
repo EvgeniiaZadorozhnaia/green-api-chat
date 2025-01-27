@@ -1,12 +1,12 @@
 .button {
-  width: auto;
-  padding: 4px 24px;
-  border-radius: 8px;
   font-family: var(--font-style);
   font-size: var(--small-font-size);
   color: var(--green);
+  box-shadow: 2px 2px 4px var(--green);
+  width: auto;
+  padding: 4px 24px;
+  border-radius: 8px;
   border: none;
-  box-shadow: 2px 2px 4px;
 }
 
 .button:hover {

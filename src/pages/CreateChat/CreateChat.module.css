@@ -1,13 +1,14 @@
 .createChat_page {
+  font-family: var(--font-style);
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 24px;
-    font-family: var(--font-style);
+    
 }
 
 .header {
   font-size: var(--header-font-size);
   color: var(--green);
-  margin-bottom: 15px;
+  margin-bottom: 5px;
 }

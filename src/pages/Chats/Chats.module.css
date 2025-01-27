@@ -1,76 +1,80 @@
 .chat_page {
-  display: flex;
-  height: 100vh;
-  width: 100%;
   font-family: var(--font-style);
   font-size: var(--small-font-size);
+  width: 50%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
 }
 
-.left_panel {
-  background-color: #ededed;
-  position: fixed;
-  width: 25%;
-  top: 0;
-  left: 0;
-  height: 100%;
-  border-right: 1px solid #ccc;
-  padding: 20px;
-  overflow-y: auto;
+.chat_header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
 }
 
-.right_panel {
-  position: fixed;
-  width: 75%;
-  top: 0;
-  right: 0;
-  height: 100%;
+.headerB {
+  font-family: var(--font-style);
+  font-size: var(--small-font-size);
+  color: var(--green);
+  box-shadow: 2px 2px 4px var(--green);
+  position: absolute;
+  width: auto;
+  padding: 4px 10px;
+  border-radius: 8px;
+  border: none;
+  right: 3%;
+}
+
+.headerB:hover {
+  cursor: pointer;
+  transform: scale(1.05);
+}
+
+.contact_name {
+  background-color: var(--second-back);
+  border-bottom: 1px solid var(--gray);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  width: 100%;
+}
+
+.avatar {
+  width: 40px;
+}
+
+.chat_history {
+  background-color: var(--white);
   display: flex;
   flex-direction: column;
   padding: 20px;
   justify-content: flex-end;
-}
-
-.contact_name {
-  position: fixed;
-  top: 0;
-  left: 25%;
-  padding: 10px 20px;
-  background-color: #ededed;
-  width: 75%;
-  text-align: left;
-  display: flex;
-  align-items: center;
-  gap: 15px;
-}
-
-.avatar {
-  height: 50px;
-}
-
-.chat_history {
-  display: flex;
-  flex-direction: column;
+  flex: 1;
   overflow-y: auto;
-  margin-bottom: 60px;
   width: 100%;
-  overflow-x: hidden;
 }
 
 .message_form {
+  background-color: var(--second-back);
   display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  justify-content: center;
+  padding: 20px;
+  border-top: 1px solid #ccc;
+  width: 100%;
 }
 
 textarea {
-  width: 100%;
   font-family: var(--font-style);
+  font-size: var(--small-font-size);
+  border: 1px solid var(--gray);
+  flex: 1;
   padding: 20px;
-  border: none;
+  border-radius: 5px;
   resize: none;
   overflow-y: auto;
-  font-size: var(--small-font-size);
 }
 
 textarea:focus {
@@ -78,13 +82,13 @@ textarea:focus {
 }
 
 .send_button {
-  border: none;
   background: none;
+  border: none;
+  padding: 5px;
+
   cursor: pointer;
-  position: absolute;
-  padding-right: 10px;
 }
 
 .send_icon {
-  height: 48px;
+  width: 40px;
 }

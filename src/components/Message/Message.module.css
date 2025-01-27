@@ -1,11 +1,13 @@
 .send_message,
 .receive_message {
+  font-family: var(--font-style);
+  font-size: var(--small-font-size);
+  box-shadow: 1px 1px 8px var(--black);
   position: relative;
   margin: 5px;
   padding: 10px;
   border-radius: 5px;
   max-width: 70%;
-  box-shadow: 1px 1px 8px black;
   display: flex;
   gap: 10px;
 }
@@ -16,12 +18,12 @@
 }
 
 .receive_message {
-  background-color: white;
+  background-color: var(--white);
   align-self: flex-start;
 }
 
 .time {
+  color: var(--gray);
   font-size: 14px;
   align-self: flex-end;
-  color: #888;
 }

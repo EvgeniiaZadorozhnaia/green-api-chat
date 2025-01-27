@@ -3,13 +3,20 @@ import { useState } from "react";
 import axios from "axios";
 import Message from "../../components/Message/Message";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import Button from "../../components/Button/Button";
 
-export default function Chats({ phoneNumber, idInstance, apiTokenInstance }) {
+export default function Chats({
+  setPhoneNumber,
+  phoneNumber,
+  idInstance,
+  apiTokenInstance,
+}) {
   const [message, setMessage] = useState("");
   const [chatMessages, setChatMessages] = useState([]);
   const [contactName, setContactName] = useState("");
-  const [chatList, setChatList] = useState([]);
-  const [currentChat, setCurrentChat] = useState([]);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (phoneNumber) {
@@ -22,6 +29,11 @@ export default function Chats({ phoneNumber, idInstance, apiTokenInstance }) {
 
   const handleMessage = (e) => {
     setMessage(e.target.value);
+  };
+
+  const handleNewChat = () => {
+    setPhoneNumber("");
+    navigate("/create-chat");
   };
 
   const formatTime = (date) => {
@@ -120,48 +132,48 @@ export default function Chats({ phoneNumber, idInstance, apiTokenInstance }) {
 
   return (
     <div className={styles.chat_page}>
-      <div className={styles.left_panel}>
-        <h1>Чаты</h1>
-      </div>
-      <div className={styles.right_panel}>
-        {contactName && (
-          <div className={styles.contact_name}>
-            <img
-              className={styles.avatar}
-              src="/icons/avatar.gif"
-              alt="Аатар пользователя"
-            />
-            {contactName}
-          </div>
-        )}
-        <div className={styles.chat_history}>
-          {chatMessages.map((el) => {
-            return (
-              <Message
-                key={el.id}
-                className={el.className}
-                message={el.message}
-                time={el.time}
-              />
-            );
-          })}
+      <div className={styles.chat_header}>
+        <div className={styles.contact_name}>
+          <img
+            className={styles.avatar}
+            src="/icons/avatar.gif"
+            alt="Аатар пользователя"
+          />
+          {contactName ? contactName : phoneNumber}
         </div>
-        <form className={styles.message_form} onSubmit={sendMessage}>
-          <textarea
-            placeholder="Введите ваше сообщение..."
-            onChange={handleMessage}
-            value={message}
-            rows={1}
-          ></textarea>
-          <button className={styles.send_button} type="submit">
-            <img
-              className={styles.send_icon}
-              src="/icons/send.png"
-              alt="Кнопка отправки сообщения"
-            />
-          </button>
-        </form>
+        <button className={styles.headerB} onClick={handleNewChat}>
+          + новый чат
+        </button>
       </div>
+
+      <div className={styles.chat_history}>
+        {chatMessages.map((el) => {
+          return (
+            <Message
+              key={el.id}
+              className={el.className}
+              message={el.message}
+              time={el.time}
+            />
+          );
+        })}
+      </div>
+
+      <form className={styles.message_form} onSubmit={sendMessage}>
+        <textarea
+          placeholder="Введите ваше сообщение..."
+          onChange={handleMessage}
+          value={message}
+          rows={1}
+        ></textarea>
+        <button className={styles.send_button} type="submit">
+          <img
+            className={styles.send_icon}
+            src="/icons/send.png"
+            alt="Кнопка отправки сообщения"
+          />
+        </button>
+      </form>
     </div>
   );
 }

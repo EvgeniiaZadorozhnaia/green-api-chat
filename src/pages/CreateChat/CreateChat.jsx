@@ -15,7 +15,8 @@ export default function CreateChat({ phoneNumber, setPhoneNumber }) {
       <div className={styles.createChat_page}>
         <h1 className={styles.header}>Введите номер телефона получателя</h1>
         <Input
-          className
+          className="custom"
+          type="tel"
           placeholder="89523205466"
           value={phoneNumber}
           onChange={(e) => setPhoneNumber(e.target.value)}

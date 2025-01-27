@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Input from "../../components/Input/Input";
 import Button from "../../components/Button/Button";
 import styles from "./Home.module.css";
 import { useNavigate } from "react-router-dom";
 
-// Допустим, у вас есть иконка глаза, или вы можете использовать любую библиотеку иконок, например, FontAwesome или Material Icons
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 export default function Home({
@@ -15,7 +14,6 @@ export default function Home({
 }) {
   const navigate = useNavigate();
 
-  // Состояние для переключения видимости apiTokenInstance
   const [showApiTokenInstance, setShowApiTokenInstance] = useState(false);
 
   const handleLogin = (e) => {
