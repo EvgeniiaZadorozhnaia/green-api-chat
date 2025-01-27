@@ -4,7 +4,6 @@ import axios from "axios";
 import Message from "../../components/Message/Message";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import Button from "../../components/Button/Button";
 
 export default function Chats({
   setPhoneNumber,
@@ -19,13 +18,66 @@ export default function Chats({
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (phoneNumber) {
-      const interval = setInterval(() => {
-        receiveMessages();
-      }, 5000);
-      return () => clearInterval(interval);
-    }
-  }, [phoneNumber]);
+
+    const receiveMessages = async () => {
+      try {
+        const { data } = await axios.get(
+          `https://7103.api.greenapi.com/waInstance${idInstance}/receiveNotification/${apiTokenInstance}`
+        );
+
+        if (!data) {
+          return;
+        }
+
+        const receiptId = data.receiptId;
+
+        if (receiptId) {
+          await axios.delete(
+            `https://7103.api.greenapi.com/waInstance${idInstance}/deleteNotification/${apiTokenInstance}/${receiptId}`
+          );
+        }
+
+        if (data?.body?.messageData?.textMessageData?.textMessage) {
+
+          const currentTime = new Date();
+          const formattedTime = formatTime(currentTime);
+          const senderName = data.body.senderData.senderName;
+          const message = data.body.messageData.textMessageData.textMessage;
+
+          if (senderName !== contactName) {
+            setContactName(senderName);
+          }
+
+          setChatMessages((prevMessages) => {
+            const isMessageExists = prevMessages.some(
+              (msg) => msg.sender === senderName && msg.message === message
+            );
+            if (isMessageExists) {
+              return prevMessages;
+            }
+
+            return [
+              ...prevMessages,
+              {
+                message,
+                time: formattedTime,
+                className: "receive_message",
+                id: data.body.idMessage,
+              },
+            ];
+          });
+        } else {
+          return;
+        }
+      } catch (error) {
+        throw new Error(error);
+      }
+    };
+
+    const interval = setInterval(receiveMessages, 5000);
+    return () => clearInterval(interval);
+
+  }, [idInstance, apiTokenInstance, contactName]);
 
   const handleMessage = (e) => {
     setMessage(e.target.value);
@@ -73,57 +125,6 @@ export default function Chats({
         setMessage("");
       } else {
         console.log("Ошибка при отправке сообщения");
-      }
-    } catch (err) {
-      throw new Error(err);
-    }
-  };
-
-  const receiveMessages = async () => {
-    try {
-      const { data } = await axios.get(
-        `https://7103.api.greenapi.com/waInstance${idInstance}/receiveNotification/${apiTokenInstance}`
-      );
-
-      if (!data) {
-        return;
-      }
-
-      const receiptId = data.receiptId;
-      if (receiptId) {
-        await axios.delete(
-          `https://7103.api.greenapi.com/waInstance${idInstance}/deleteNotification/${apiTokenInstance}/${receiptId}`
-        );
-      }
-
-      if (data?.body?.idMessage) {
-        const currentTime = new Date();
-        const formattedTime = formatTime(currentTime);
-        const senderName = data.body.senderData.senderName;
-        const message = data.body.messageData.textMessageData.textMessage;
-
-        if (senderName !== contactName) {
-          setContactName(senderName);
-        }
-
-        setChatMessages((prevMessages) => {
-          const isMessageExists = prevMessages.some(
-            (msg) => msg.sender === senderName && msg.text === message
-          );
-          if (isMessageExists) {
-            return prevMessages;
-          }
-
-          return [
-            ...prevMessages,
-            {
-              message,
-              time: formattedTime,
-              className: "receive_message",
-              id: data.body.idMessage,
-            },
-          ];
-        });
       }
     } catch (err) {
       throw new Error(err);
