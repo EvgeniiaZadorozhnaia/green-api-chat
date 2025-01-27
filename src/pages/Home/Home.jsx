@@ -1,17 +1,16 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import Input from "../../components/Input/Input";
 import Button from "../../components/Button/Button";
 import styles from "./Home.module.css";
 import { useNavigate } from "react-router-dom";
-
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import Context from "../../Context";
 
-export default function Home({
-  idInstance,
-  setIdInstance,
-  apiTokenInstance,
-  setApiTokenInstance,
-}) {
+export default function Home() {
+  
+  const { idInstance, setIdInstance, apiTokenInstance, setApiTokenInstance } =
+    useContext(Context);
+
   const navigate = useNavigate();
 
   const [showApiTokenInstance, setShowApiTokenInstance] = useState(false);

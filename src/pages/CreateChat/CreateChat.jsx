@@ -2,8 +2,13 @@ import styles from "./CreateChat.module.css";
 import Input from "../../components/Input/Input";
 import Button from "../../components/Button/Button";
 import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import Context from "../../Context";
 
-export default function CreateChat({ phoneNumber, setPhoneNumber }) {
+export default function CreateChat() {
+  
+  const { phoneNumber, setPhoneNumber } = useContext(Context);
+
   const navigate = useNavigate();
 
   const handleChat = () => {

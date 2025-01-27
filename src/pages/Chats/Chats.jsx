@@ -1,24 +1,23 @@
 import styles from "./Chats.module.css";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import axios from "axios";
 import Message from "../../components/Message/Message";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import Context from "../../Context";
 
-export default function Chats({
-  setPhoneNumber,
-  phoneNumber,
-  idInstance,
-  apiTokenInstance,
-}) {
+export default function Chats() {
+  
+  const { idInstance, apiTokenInstance, phoneNumber, setPhoneNumber } =
+    useContext(Context);
   const [message, setMessage] = useState("");
   const [chatMessages, setChatMessages] = useState([]);
   const [contactName, setContactName] = useState("");
 
   const navigate = useNavigate();
 
-  useEffect(() => {
 
+  useEffect(() => {
     const receiveMessages = async () => {
       try {
         const { data } = await axios.get(
@@ -38,7 +37,6 @@ export default function Chats({
         }
 
         if (data?.body?.messageData?.textMessageData?.textMessage) {
-
           const currentTime = new Date();
           const formattedTime = formatTime(currentTime);
           const senderName = data.body.senderData.senderName;
@@ -76,7 +74,6 @@ export default function Chats({
 
     const interval = setInterval(receiveMessages, 5000);
     return () => clearInterval(interval);
-
   }, [idInstance, apiTokenInstance, contactName]);
 
   const handleMessage = (e) => {
