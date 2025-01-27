@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import Context from "../../Context";
 
 export default function Chats() {
-  
+
   const { idInstance, apiTokenInstance, phoneNumber, setPhoneNumber } =
     useContext(Context);
   const [message, setMessage] = useState("");
@@ -16,65 +16,9 @@ export default function Chats() {
 
   const navigate = useNavigate();
 
-
   useEffect(() => {
-    const receiveMessages = async () => {
-      try {
-        const { data } = await axios.get(
-          `https://7103.api.greenapi.com/waInstance${idInstance}/receiveNotification/${apiTokenInstance}`
-        );
-
-        if (!data) {
-          return;
-        }
-
-        const receiptId = data.receiptId;
-
-        if (receiptId) {
-          await axios.delete(
-            `https://7103.api.greenapi.com/waInstance${idInstance}/deleteNotification/${apiTokenInstance}/${receiptId}`
-          );
-        }
-
-        if (data?.body?.messageData?.textMessageData?.textMessage) {
-          const currentTime = new Date();
-          const formattedTime = formatTime(currentTime);
-          const senderName = data.body.senderData.senderName;
-          const message = data.body.messageData.textMessageData.textMessage;
-
-          if (senderName !== contactName) {
-            setContactName(senderName);
-          }
-
-          setChatMessages((prevMessages) => {
-            const isMessageExists = prevMessages.some(
-              (msg) => msg.sender === senderName && msg.message === message
-            );
-            if (isMessageExists) {
-              return prevMessages;
-            }
-
-            return [
-              ...prevMessages,
-              {
-                message,
-                time: formattedTime,
-                className: "receive_message",
-                id: data.body.idMessage,
-              },
-            ];
-          });
-        } else {
-          return;
-        }
-      } catch (error) {
-        throw new Error(error);
-      }
-    };
-
-    const interval = setInterval(receiveMessages, 5000);
-    return () => clearInterval(interval);
-  }, [idInstance, apiTokenInstance, contactName]);
+    receiveMessages();
+  }, []);
 
   const handleMessage = (e) => {
     setMessage(e.target.value);
@@ -113,10 +57,10 @@ export default function Chats() {
         setChatMessages((prevMessages) => [
           ...prevMessages,
           {
-            className: "send_message",
-            message,
-            time: formattedTime,
             id: data.idMessage,
+            time: formattedTime,
+            message,
+            className: "send_message",
           },
         ]);
         setMessage("");
@@ -125,6 +69,60 @@ export default function Chats() {
       }
     } catch (err) {
       throw new Error(err);
+    }
+  };
+
+  const receiveMessages = async () => {
+    try {
+      const { data } = await axios.get(
+        `https://7103.api.greenapi.com/waInstance${idInstance}/receiveNotification/${apiTokenInstance}`
+      );
+
+      const { receiptId } = data;
+
+      if (receiptId) {
+        await axios.delete(
+          `https://7103.api.greenapi.com/waInstance${idInstance}/deleteNotification/${apiTokenInstance}/${receiptId}`
+        );
+      }
+
+      const receiveMessage =
+        data?.body?.messageData?.textMessageData?.textMessage;
+
+      if (receiveMessage) {
+        const messageID = data?.body?.idMessage;
+        const senderName = data?.body?.senderData?.senderName;
+        const currentTime = new Date();
+        const formattedTime = formatTime(currentTime);
+
+        if (senderName !== contactName) {
+          setContactName(senderName);
+        }
+
+        setChatMessages((prevMessages) => {
+          const isMessageExists = prevMessages.some(
+            (msg) => msg.id === messageID
+          );
+          if (isMessageExists) {
+            return prevMessages;
+          }
+
+          return [
+            ...prevMessages,
+            {
+              id: messageID,
+              time: formattedTime,
+              message: receiveMessage,
+              className: "receive_message",
+            },
+          ];
+        });
+      }
+      await receiveMessages();
+    } catch (e) {
+      setTimeout(() => {
+        receiveMessages();
+      }, 5000);
     }
   };
 
