@@ -1,8 +1,28 @@
-# React + Vite
+# Локальный запуск проекта на React
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 1. Установите Node.js и npm
 
-Currently, two official plugins are available:
+1) Для начала вам нужно установить [Node.js](https://nodejs.org/) и npm (менеджер пакетов для JavaScript). Рекомендуется установить стабильную версию LTS.
+2) После установки проверьте, что Node.js и npm установлены корректно, выполнив следующие команды в терминале:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+`node -v`
+`npm -v`
+
+Если команды вернут версии Node.js и npm, значит установка прошла успешно.
+
+## 2. Клонируйте репозиторий
+
+1) Склонируйте этот репозиторий на свой локальный компьютер:
+`git clone https://github.com/EvgeniiaZadorozhnaia/green-api-chat.git`
+
+2) Перейдите в директорию проекта: `cd green-api-chat`
+
+## 3. Установите зависимости
+
+1) `npm install`
+
+## 4. Запустите проект
+
+1) `npm run dev`
+
+Проект будет доступен по адресу: http://localhost:5173
